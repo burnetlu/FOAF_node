@@ -1,0 +1,172 @@
+
+<!-- SET THE CONTROLLER -->
+
+<!--- Point d'entrée du module deck. Controlleur : decksConstrolleur -->
+<!--- Point suivant : public/js/deck.js -->
+<div class="searchBar" style="margin-top: 47px" >
+    <form method="post" class="form-wrapper cf "  >
+        <!--- ng-model sera utilisé par public/js/deck.js pour récupérer les valeurs du formulaire -->
+        <input type="text" name="recherche" class="  " placeholder="{{somePlaceholder}}" ng-model="formData.valQuery">
+        <!--- ng-click indique quelle fonction de ng-controller il faut utiliser lors du click -->
+        <button type="submit" class="btn btn-primary btn-lg  " ng-click="searchQuery()" >Ok</button>
+
+
+
+        <h2 ng-click="goOP = !goOP"><span ng-show="!goOP">+</span><span ng-show="goOP">-</span> Oeuvre // Personne</h2>
+        <div ng-show="goOP">
+            <!--- for options selected, we will have formData.valOptions = { value:ng-true-value, value2:ng-true-value2 ... } -->
+            <input type="checkbox" name="options" ng-true-value="<http://dbpedia.org/property/writer>" id="writer" ng-model="formData.valOptions.writer"/> 
+            <label for="writer">Writer</label><br/> 
+            <input type="checkbox" name="options" ng-true-value="<http://dbpedia.org/property/cinematography>" id="cinematography"  ng-model="formData.valOptions.cinematography"/> 
+            <label for="cinematography">Cinematography</label><br/> 
+            <input type="checkbox" name="options" ng-true-value="<http://dbpedia.org/property/director>" id="director" ng-model="formData.valOptions.director"/> 
+            <label for="director">Director</label><br/> 
+            <input type="checkbox" name="options" ng-true-value="<http://dbpedia.org/property/music>" id="music" ng-model="formData.valOptions.music"/> 
+            <label for="music">Music</label><br/> 
+            <input type="checkbox" name="options" ng-true-value="<http://dbpedia.org/property/narrator>" id="narrator" ng-model="formData.valOptions.narrator"/> 
+            <label for="narrator">Narrator</label><br/> 
+            <input type="checkbox" name="options" ng-true-value="<http://dbpedia.org/property/starring>" id="starring" ng-model="formData.valOptions.starring"/> 
+            <label for="starring">Starring</label><br/> 
+            <input type="checkbox" name="options" ng-true-value="<http://dbpedia.org/property/musicComposer>" id="musicComposer" ng-model="formData.valOptions.musicComposer"/> 
+            <label for="musicComposer">Music Composer</label><br/> 
+            <input type="checkbox" name="options" ng-true-value="<http://dbpedia.org/property/artist>" id="artist" ng-model="formData.valOptions.artist"/> 
+            <label for="artist">Artist</label><br/> 
+            <input type="checkbox" name="options" ng-true-value="<http://dbpedia.org/property/author>" id="author" ng-model="formData.valOptions.author"/> 
+            <label for="author">Author</label><br/> 
+            <input type="checkbox" name="options" ng-true-value="<http://dbpedia.org/ontology/executiveProducer>" id="executiveProducer" ng-model="formData.valOptions.executiveProducer"/> 
+            <label for="executiveProducer">Executive Producer</label><br/> 
+            <input type="checkbox" name="options" ng-true-value="<http://dbpedia.org/ontology/artist>" id="performer" ng-model="formData.valOptions.artist" /> 
+            <label for="performer">Performer</label><br/>
+        </div>
+
+        <h2 ng-click="goPP = !goPP"><span ng-show="!goPP">+</span><span ng-show="goPP">-</span> Personne // Personne</h2>
+        <div ng-show="goPP">
+            <input type="checkbox" name="options" ng-true-value="<http://dbpedia.org/property/associatedActs>" id="associatedActs"  ng-model="formData.valOptions.associatedActs"/> 
+            <label for="associatedActs">Associated Acts</label><br/> 
+            <input type="checkbox" name="options" ng-true-value="<http://dbpedia.org/ontology/associatedBand>" id="associatedBand"  ng-model="formData.valOptions.associatedBand"/> 
+            <label for="associatedBand">Associated Band</label><br/> 
+            <input type="checkbox" name="options" ng-true-value="<http://dbpedia.org/ontology/associatedMusicalArtist>" id="associatedMusicalArtist"  ng-model="formData.valOptions.associatedMusicalArtist"/> 
+            <label for="associatedMusicalArtist">Associated Musical Artist</label><br/> 
+            <input type="checkbox" name="options" ng-true-value="<http://dbpedia.org/property/appointer>" id="appointer"  ng-model="formData.valOptions.appointer"/> 
+            <label for="appointer">Appointer</label><br/> 
+            <input type="checkbox" name="options" ng-true-value="<http://dbpedia.org/property/nominator>" id="nominator"  ng-model="formData.valOptions.nominator"/> 
+            <label for="nominator">Nominator</label><br/> 
+            <input type="checkbox" name="options" ng-true-value="<http://dbpedia.org/ontology/child>" id="child"  ng-model="formData.valOptions.child"/> 
+            <label for="child">Child / Parent</label><br/> 
+            <input type="checkbox" name="options" ng-true-value="<http://dbpedia.org/property/influences>" id="influences"  ng-model="formData.valOptions.influences"/> 
+            <label for="influences">Influences / Influenced By</label><br/> 
+            <input type="checkbox" name="options" ng-true-value="<http://dbpedia.org/ontology/spouse>" id="spouse"  ng-model="formData.valOptions.spouse"/> 
+            <label for="spouse">Spouse</label><br/>
+        </div>
+
+        <h2 ng-click="goEP = !goEP"><span ng-show="!goEP">+</span><span ng-show="goEP">-</span> Evenement // Personne</h2>
+        <div ng-show="goEP">
+            <input type="checkbox" name="options" ng-true-value="<http://dbpedia.org/property/candidate>" id="candidate"  ng-model="formData.valOptions.candidate"/> 
+            <label for="candidate">Candidate</label><br/> 
+            <input type="checkbox" name="options" ng-true-value="<http://dbpedia.org/ontology/guest>" id="guest"  ng-model="formData.valOptions.guest"/> 
+            <label for="guest">Guest</label><br/> 
+            <input type="checkbox" name="options" ng-true-value="<http://dbpedia.org/property/opentheme>" id="opentheme"  ng-model="formData.valOptions.opentheme"/>
+            <label for="opentheme">Opentheme</label><br/> 
+            <input type="checkbox" name="options" ng-true-value="<http://dbpedia.org/ontology/battle>" id="battle"  ng-model="formData.valOptions.battle"/> 
+            <label for="battle">Battle</label><br/>
+        </div>
+
+        <h2 ng-click="goLP = !goLP"><span ng-show="!goLP">+</span><span ng-show="goLP">-</span> Lieux // Personne</h2>
+        <div ng-show="goLP">
+            <input type="checkbox" name="options" ng-true-value="<http://dbpedia.org/property/leaderName>" id="leaderName"  ng-model="formData.valOptions.leaderName"/> 
+            <label for="leaderName">Leader Name</label><br/> 
+            <input type="checkbox" name="options" ng-true-value="<http://dbpedia.org/property/commander>" id="commander"  ng-model="formData.valOptions.commander"/> 
+            <label for="leaderName">commander</label><br/> 
+            <input type="checkbox" name="options" ng-true-value="<http://dbpedia.org/property/commanderInChief>" id="commanderInChief"  ng-model="formData.valOptions.commanderInChief"/> 
+            <label for="commanderInChief">Commander In Chief</label><br/> 
+            <input type="checkbox" name="options" ng-true-value="<http://dbpedia.org/ontology/birthPlace>" id="birthPlace"  ng-model="formData.valOptions.birthPlace"/> 
+            <label for="birthPlace">Birth Place</label><br/> 
+            <input type="checkbox" name="options" ng-true-value="<http://dbpedia.org/ontology/restingPlace>" id="restingPlace"  ng-model="formData.valOptions.restingPlace"/> 
+            <label for="restingPlace">Resting Place</label><br/> 
+            <input type="checkbox" name="options" ng-true-value="<http://dbpedia.org/property/deathPlace>" id="deathPlace"  ng-model="formData.valOptions.deathPlace"/> 
+            <label for="deathPlace">Death Place</label><br/>
+        </div>
+
+
+        <h2 ng-click="goOjP = !goOjP"><span ng-show="!goOjP">+</span><span ng-show="goOjP">-</span> Objet // Personne</h2>
+        <div ng-show="goOjP">
+            <input type="checkbox" name="options" ng-true-value="<http://dbpedia.org/property/endorsedBy>" id="endorsedBy"  ng-model="formData.valOptions.endorsedBy"/> 
+            <label for="endorsedBy">Endorsed By</label><br/> 
+        </div>
+
+        <h2>Toutes les relations</h2> 
+        <input type="checkbox" name="options" ng-true-value="?r" id="all" ng-checked="true"/>
+        <label for="all">All</label><br/>
+
+        <h2>Vue désirée</h2> 
+        <input type="radio" ng-model="vue" value="graph" id="graphView"/> 
+        <label for="graphView">Graphe</label><br/>
+        <input type="radio" ng-model="vue" value="tree" id="treeView"/> 
+        <label for="treeView">Arbre circulaire</label><br/>
+        <input type="radio" ng-model="vue" value="indented" id="indentedView"/> 
+        <label for="indentedView">Arbre indenté</label><br/>
+        <input type="radio" ng-model="vue" value="bubble" id="bubbleView"/> 
+        <label for="bubbleView">Arbre à bulles</label><br/>
+    </form>
+</div>		
+
+<div class="searchBarRight" style="margin-top: 47px; z-index: 100;" >
+
+    <form method="post" class="form-wrapper cf "  >
+
+        <p>Relations trouvées :
+            <select class="selectRelation" multiple="" size="3">
+                <option selected=""> None... </option>
+            </select>
+        </p>
+
+        <div id="wikipedia"></div>
+    </form>
+
+
+</div>		
+
+<div class="tool-container" style="z-index: 150;">
+    <div class="tool-items">
+        <a class="tool-item gradient zoom" id="zoom_in" title="Zoom in">
+            <i class="icon-zoom-in"></i>
+        </a>
+        <a class="tool-item gradient zoom" id="zoom_out" title="Zoom out">
+            <i class="icon-zoom-out"></i>
+        </a>
+        <a class="tool-item gradient zoom" id="intial_scale" title="Initial zoom">
+            <i class="icon-close"></i>
+        </a>
+        <a class="tool-item gradient dragAndDrop" id="drag_and_drop" title="Drag and Drop" value="0">
+            <i class="icon-drag-and-drop"></i>
+        </a>
+        <a class="tool-item gradient rotate" id="rotate" title="Rotate" value="0">
+            <i class="icon-rotate"></i>
+        </a>
+        <!--
+        <a class="tool-item gradient fullscreen" id="full_screen" title="Full screen" onClick="fullscreenClick();">
+            <i class="icon-full-screen"></i>
+        </a>
+        <a class="tool-item gradient print" id="print" title="Print" onClick="PrintElem('#contentCenter');">
+            <i class="icon-print"></i>
+        </a>
+        -->
+    </div>
+</div>
+
+<section id="main-content">
+    <section class="wrapper site-min-height">
+        <h3><i class="fa fa-angle-right"></i> Object -> People -> Object -> People</h3>
+        <div class="row mt">
+            <div class="col-lg-12">
+                <div id="contentCenter" style="width:100%; height:500px;"></div>
+            </div>
+        </div>
+    </section><! --/wrapper -->
+</section><!-- /MAIN CONTENT -->
+
+
+
+
+
+

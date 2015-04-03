@@ -1,0 +1,47 @@
+<div class="container search" xmlns="http://www.w3.org/1999/html" >
+
+    <div id="bg">
+    <img src="img/bg.jpg" alt="">
+    </div>
+
+    <h3 class="text-center col-md-12 logo ">Find <span>α</span> !</h3>
+
+    <br/>
+
+    <form class="form-wrapper cf col-md-6 col-md-offset-3" role="form">
+        <input type="text" class=" col-md-10 " placeholder="Nom ou prénom ou vide (n'importe qui)" ng-model="formData.valSearch">
+        <button type="submit" class="btn btn-primary btn-lg col-md-2 " ng-click="goSearch()">Ok</button>
+    </form>
+
+    <!--{{lsSearch.person}}-->
+    <h5  class="titleSearch col-md-6 col-md-offset-3" ng-click="goFilter = !goFilter">Filtre▾</h5>
+        <div id="lesfiltres" class="col-md-6 col-md-offset-3" ng-show="goFilter">
+              <input type="text" class=" col-md-12 " name="options" placeholder="Date de naissance (format : AAAA-MM-DD)" ng-model="formData.valSearchOption.birthDate"> <br/>
+              <input type="text" class=" col-md-12 " name="options" placeholder="Année de naissance" ng-model="formData.valSearchOption.birthYear"> <br/>
+              <input type="text" class=" col-md-12 " name="options" placeholder="Lieux de naissance" ng-model="formData.valSearchOption.placeBirth"> <br/>
+              <input type="text" class=" col-md-12 " name="options" placeholder="Fonction (Architecte, Policier, ...)" ng-model="formData.valSearchOption.titleFunction"> <br/>
+        </div>
+
+    <div  class="col-md-12">
+    <div id="result-search-list" class="col-md-4 " ng-repeat="search in lsSearch | unique:'person.value'">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title" ng-click="goRestSearch(search)"> {{search.name.value}}</h3>
+                <div ng-if="search.picture.value">
+                    <img ng-src="{{search.picture.value}}" >
+                </div>
+            </div>
+            <div ng-if="search.descro.value" class="panel-body">
+               <p>{{search.descro.value}}</p>
+            </div>
+            <div  ng-if="search.birth.value" class="panel-body">
+                <p><span>Naissance</span> : {{search.birth.value}}</p>
+            </div>
+            <div  ng-if="search.birthplace.value" class="panel-body">
+                <p><span>Lieux naissance</span> : {{search.birthplace.value}}</p>
+            </div>
+        </div>
+    </div>
+    </div>
+</div>
+

@@ -1,0 +1,13 @@
+{
+  "name": "POP",
+  "description": "Pop Prototype",
+  "version": "0.0.1",
+  "homepage": "http://www.calopea.com",
+  "private": true,
+  "dependencies": {
+    "bootstrap": "~3.x",
+    "angular": "~1.2.x",
+    "angular-route": "~1.2.x",
+    "angular-filter" :"*"
+  }
+}
